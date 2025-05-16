@@ -1,0 +1,46 @@
+# ELF header
+7F                       # First byte of ELF magic number
+45 4c 46                 # "ELF" in ASCII (magic bytes)
+02                       # Class (2 = 64-bit)
+01                       # Data encoding (1 = little-endian)
+01                       # ELF version (1)
+00                       # OS ABI identifier (0 = System V)
+00 00 00 00 00 00 00 00  # ABI version and padding bytes
+02 00                    # Object file type (2 = executable)
+3e 00                    # Machine architecture (0x3e = x86-64)
+01 00 00 00              # ELF version (1)
+78 00 40 00 00 00 00 00  # Entry point address (0x400078)
+40 00 00 00 00 00 00 00  # Program header table offset (0x40)
+00 00 00 00 00 00 00 00  # Section header table offset (0)
+00 00 00 00              # Flags (0)
+40 00                    # ELF header size (64 bytes)
+38 00                    # Program header entry size (56 bytes)
+01 00                    # Number of program headers (1)
+00 00                    # Section header entry size (0)
+00 00                    # Number of section headers (0)
+00 00                    # Section header string table index (0)
+
+# program header
+01 00 00 00              # Program header type (1 = loadable segment)
+05 00 00 00              # Flags (5 = read + execute)
+00 00 00 00 00 00 00 00  # Segment offset in file (0)
+00 00 40 00 00 00 00 00  # Virtual address (0x400000)
+00 00 40 00 00 00 00 00  # Physical address (0x400000)
+b4 00 00 00 00 00 00 00  # Size in file (180 bytes)
+b4 00 00 00 00 00 00 00  # Size in memory (180 bytes)
+00 10 00 00 00 00 00 00  # Alignment (4096 bytes)
+
+# write syscall instructions
+48 c7 c0 01 00 00 00  # mov rax, 1
+48 c7 c7 01 00 00 00  # mov rdi, 1
+48 8d 35 19 00 00 00  # lea rsi, [rip+25]
+48 c7 c2 0e 00 00 00  # mov rdx, 14
+0f 05                 # syscall
+
+# exit syscall instructions
+48 c7 c0 3c 00 00 00  # mov rax, 60
+48 c7 c7 00 00 00 00  # mov rdi, 0
+0f 05                 # syscall
+
+# hello world string
+48 65 6c 6c 6f 2c 20 57 6f 72 6c 64 21 0a
