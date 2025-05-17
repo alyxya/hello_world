@@ -1,6 +1,5 @@
 # ELF header
-7F                       # First byte of ELF magic number
-45 4c 46                 # "ELF" in ASCII (magic bytes)
+7F 45 4c 46              # Magic number of ELF file
 02                       # Class (2 = 64-bit)
 01                       # Data encoding (1 = little-endian)
 01                       # ELF version (1)
@@ -20,7 +19,7 @@
 00 00                    # Number of section headers (0)
 00 00                    # Section header string table index (0)
 
-# program header
+# Program header
 01 00 00 00              # Program header type (1 = loadable segment)
 05 00 00 00              # Flags (5 = read + execute)
 00 00 00 00 00 00 00 00  # Segment offset in file (0)
